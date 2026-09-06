@@ -1,0 +1,96 @@
+<header>
+  <h1>Home</h1>
+
+  <%= link_to "What's happening?",
+      new_post_path,
+      class: "btn btn-primary" %>
+
+  <div style="margin-top: 15px;">
+    <%= link_to "All Posts", home_path %>
+    &nbsp;&nbsp;
+    <%= link_to "Following", following_path %>
+  </div>
+</header>
+
+<% @posts.each do |post| %>
+
+  <article class="post-card">
+
+    <div>
+      <strong>
+        <%= link_to post.user.display_name,
+            user_profile_path(post.user.username) %>
+      </strong>
+
+      <span>
+        @<%= post.user.username %>
+      </span>
+
+      <small>
+        · <%= post.created_at.strftime("%b %d, %Y %H:%M") %>
+      </small>
+    </div>
+
+    <p>
+      <%= link_to post.content,
+          post_path(post),
+          style: "text-decoration: none;" %>
+    </p>
+
+    <div class="post-actions">
+
+      <span>
+        ❤️ <%= post.likes.count %>
+      </span>
+
+      <span>
+        💬 <%= post.comments.count %>
+      </span>
+
+    </div>
+
+    <div class="post-actions">
+
+      <% like = post.likes.find_by(user: Current.user) %>
+
+      <% if like %>
+
+        <%= button_to "Unlike",
+            post_like_path(post, like),
+            method: :delete,
+            class: "btn btn-secondary" %>
+
+      <% else %>
+
+        <%= button_to "Like",
+            post_likes_path(post),
+            method: :post,
+            class: "btn btn-secondary" %>
+
+      <% end %>
+
+      <%= link_to "Comment",
+          post_path(post),
+          class: "btn btn-secondary" %>
+
+      <% if post.user == Current.user %>
+
+        <%= link_to "Edit",
+            edit_post_path(post),
+            class: "btn btn-secondary" %>
+
+        <%= button_to "Delete",
+            post,
+            method: :delete,
+            class: "btn btn-secondary",
+            data: {
+              turbo_confirm: "Are you sure?"
+            } %>
+
+      <% end %>
+
+    </div>
+
+  </article>
+
+<% end %>

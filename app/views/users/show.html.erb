@@ -1,0 +1,77 @@
+<div class="profile-header">
+
+  <div class="profile-avatar">
+    <%= @user.display_name.first.upcase %>
+  </div>
+
+  <h1>
+    <%= @user.display_name %>
+  </h1>
+
+  <p class="profile-username">
+    @<%= @user.username %>
+  </p>
+
+  <% if @user != Current.user %>
+
+    <% if Current.user.following.include?(@user) %>
+
+      <%= button_to "Unfollow",
+          unfollow_user_path(@user.username),
+          method: :delete,
+          class: "btn btn-secondary" %>
+
+    <% else %>
+
+      <%= button_to "Follow",
+          follow_user_path(@user.username),
+          method: :post,
+          class: "btn btn-primary" %>
+
+    <% end %>
+
+  <% end %>
+
+  <div class="profile-stats">
+
+    <strong>
+      <%= @user.posts.count %>
+      Posts
+    </strong>
+
+    <strong>
+      <%= @user.followers.count %>
+      Followers
+    </strong>
+
+    <strong>
+      <%= @user.following.count %>
+      Following
+    </strong>
+
+  </div>
+
+</div>
+
+<% @posts.each do |post| %>
+
+  <article class="post-card">
+
+    <p>
+      <%= link_to post.content,
+          post_path(post),
+          style: "text-decoration: none;" %>
+    </p>
+
+    <small>
+      <%= post.created_at.strftime("%b %d, %Y %H:%M") %>
+    </small>
+
+    <div class="post-actions">
+      ❤️ <%= post.likes.count %>
+      💬 <%= post.comments.count %>
+    </div>
+
+  </article>
+
+<% end %>

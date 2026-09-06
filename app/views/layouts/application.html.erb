@@ -1,29 +1,125 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Twitter Clone" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Twitter Clone">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>Twitter Clone</title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <%= stylesheet_link_tag :app,
+        "data-turbo-track": "reload" %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <% if authenticated? %>
+
+      <div class="app">
+
+        <aside class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <%= link_to "𝕏",
+                home_path,
+                class: "logo" %>
+
+            <nav>
+
+              <%= link_to home_path,
+                  class: "nav-item" do %>
+                <span>⌂</span>
+                <span>Home</span>
+              <% end %>
+
+              <%= link_to following_path,
+                  class: "nav-item" do %>
+                <span>✦</span>
+                <span>Following</span>
+              <% end %>
+
+              <%= link_to user_profile_path(Current.user.username),
+                  class: "nav-item" do %>
+                <span>♙</span>
+                <span>Profile</span>
+              <% end %>
+
+            </nav>
+
+            <%= link_to new_post_path,
+                class: "post-button" do %>
+              Post
+            <% end %>
+
+            <div class="sidebar-user">
+
+              <div class="avatar">
+                <%= Current.user.display_name.first.upcase %>
+              </div>
+
+              <div>
+                <strong>
+                  <%= Current.user.display_name %>
+                </strong>
+
+                <small>
+                  @<%= Current.user.username %>
+                </small>
+              </div>
+
+            </div>
+
+            <%= button_to "Log out",
+                session_path,
+                method: :delete,
+                class: "logout-button" %>
+
+          </div>
+
+        </aside>
+
+        <main class="main-content">
+
+          <% if notice %>
+            <div class="flash notice">
+              <%= notice %>
+            </div>
+          <% end %>
+
+          <% if alert %>
+            <div class="flash alert">
+              <%= alert %>
+            </div>
+          <% end %>
+
+          <%= yield %>
+
+        </main>
+
+      </div>
+
+    <% else %>
+
+      <% if notice %>
+        <div class="flash notice">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="flash alert">
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
+    <% end %>
+
   </body>
 </html>

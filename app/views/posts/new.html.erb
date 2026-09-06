@@ -1,0 +1,43 @@
+<header>
+  <h1>Create a post</h1>
+</header>
+
+<div style="padding: 25px;">
+
+  <% if @post.errors.any? %>
+
+    <div class="error-box">
+
+      <strong>
+        <%= pluralize(@post.errors.count, "error") %>
+        prevented this post from being created:
+      </strong>
+
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    </div>
+
+  <% end %>
+
+  <%= form_with model: @post do |form| %>
+
+    <div class="form-group">
+
+      <%= form.label :content,
+          "What's happening?" %>
+
+      <%= form.text_area :content,
+          placeholder: "What's happening?" %>
+
+    </div>
+
+    <%= form.submit "Post",
+        class: "btn btn-primary" %>
+
+  <% end %>
+
+</div>

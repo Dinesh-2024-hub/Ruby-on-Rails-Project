@@ -1,10 +1,622 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #0f1419;
+}
+
+/* =========================
+   APP LAYOUT
+   ========================= */
+
+.app {
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  border-right: 1px solid #e6e6e6;
+  background: #ffffff;
+}
+
+.sidebar-inner {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+
+  color: #111111;
+  text-decoration: none;
+  font-size: 35px;
+  font-weight: bold;
+
+  border-radius: 50%;
+}
+
+.logo:hover {
+  background: #f2f2f2;
+}
+
+.sidebar nav {
+  margin-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 14px 18px;
+
+  color: #0f1419;
+  text-decoration: none;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  border-radius: 30px;
+}
+
+.nav-item:hover {
+  background: #f2f2f2;
+}
+
+.nav-item span:first-child {
+  width: 25px;
+  text-align: center;
+}
+
+.post-button {
+  margin-top: 25px;
+
+  display: block;
+
+  padding: 15px;
+
+  background: #111111;
+  color: white;
+
+  text-align: center;
+  text-decoration: none;
+
+  border-radius: 30px;
+
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.post-button:hover {
+  background: #333333;
+}
+
+.sidebar-user {
+  margin-top: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+}
+
+.sidebar-user small {
+  display: block;
+  color: #687078;
+  margin-top: 3px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #111111;
+  color: white;
+
+  font-weight: bold;
+}
+
+.logout-button {
+  width: 100%;
+  margin-top: 10px;
+
+  padding: 12px;
+
+  border: 1px solid #d9d9d9;
+  background: white;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: #f5f5f5;
+}
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+
+.main-content {
+  width: 650px;
+  min-height: 100vh;
+
+  margin-left: 280px;
+
+  border-right: 1px solid #e6e6e6;
+
+  padding-bottom: 50px;
+}
+
+.main-content > header {
+  position: sticky;
+  top: 0;
+
+  z-index: 5;
+
+  padding: 18px 25px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.main-content > header h1 {
+  margin: 0 0 15px;
+}
+
+/* =========================
+   POSTS
+   ========================= */
+
+.post-card {
+  padding: 20px 25px;
+
+  border-bottom: 1px solid #e6e6e6;
+
+  transition: background 0.15s ease;
+}
+
+.post-card:hover {
+  background: #fafafa;
+}
+
+.post-card p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.post-card a {
+  color: inherit;
+}
+
+.post-card small {
+  color: #687078;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+button,
+input[type="submit"] {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button {
+  border: none;
+}
+
+.btn {
+  display: inline-block;
+
+  padding: 13px 20px;
+
+  border-radius: 30px;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #111111;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #333333;
+}
+
+.btn-secondary {
+  background: white;
+  color: #111111;
+
+  border: 1px solid #cfd3d6;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* =========================
+   FORMS
+   ========================= */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+textarea,
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+
+  padding: 14px;
+
+  border: 1px solid #cfd3d6;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+textarea:focus {
+  border-color: #111111;
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* =========================
+   PROFILE
+   ========================= */
+
+.profile-header {
+  padding: 35px 25px;
+
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #111111;
+  color: white;
+
+  font-size: 30px;
+  font-weight: bold;
+
+  margin-bottom: 15px;
+}
+
+.profile-header h1 {
+  margin-bottom: 4px;
+}
+
+.profile-username {
+  color: #687078;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* =========================
+   AUTH PAGES
+   ========================= */
+
+.auth-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+
+  background: #f7f7f7;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 430px;
+
+  padding: 40px;
+
+  background: white;
+
+  border: 1px solid #e6e6e6;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.auth-logo {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.auth-card h1 {
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  color: #687078;
+  margin-bottom: 30px;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #687078;
+}
+
+.auth-footer a {
+  color: #111111;
+  font-weight: bold;
+}
+
+/* =========================
+   LANDING PAGE
+   ========================= */
+
+.landing-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      #eeeeee,
+      transparent 35%
+    ),
+    #ffffff;
+}
+
+.landing-content {
+  max-width: 700px;
+  padding: 50px;
+}
+
+.landing-logo {
+  font-size: 70px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.landing-content h1 {
+  font-size: 60px;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.landing-content h2 {
+  font-size: 32px;
+  margin-top: 25px;
+}
+
+.landing-content p {
+  color: #687078;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.landing-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* =========================
+   FLASH MESSAGES
+   ========================= */
+
+.flash {
+  margin: 15px 25px;
+  padding: 13px 18px;
+
+  border-radius: 10px;
+
+  font-weight: 500;
+}
+
+.notice {
+  background: #e8f5e9;
+}
+
+.alert {
+  background: #fff0f0;
+}
+
+/* =========================
+   ERRORS
+   ========================= */
+
+.error-box {
+  margin-bottom: 20px;
+  padding: 15px;
+
+  background: #fff0f0;
+
+  border: 1px solid #ffcaca;
+
+  border-radius: 10px;
+}
+
+.error-box ul {
+  margin-bottom: 0;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar-inner {
+    align-items: center;
+    padding: 15px 8px;
+  }
+
+  .sidebar nav {
+    width: 100%;
+  }
+
+  .nav-item {
+    justify-content: center;
+    padding: 14px 8px;
+  }
+
+  .nav-item span:last-child {
+    display: none;
+  }
+
+  .post-button {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 0;
+  }
+
+  .post-button::after {
+    content: "+";
+    font-size: 25px;
+  }
+
+  .sidebar-user {
+    display: none;
+  }
+
+  .logout-button {
+    font-size: 0;
+    width: 50px;
+  }
+
+  .logout-button::after {
+    content: "↪";
+    font-size: 20px;
+  }
+
+  .main-content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+  }
+
+  .landing-content {
+    padding: 30px;
+  }
+
+  .landing-content h1 {
+    font-size: 45px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .main-content {
+    width: calc(100% - 70px);
+    margin-left: 70px;
+  }
+
+  .sidebar {
+    width: 70px;
+  }
+
+  .post-card {
+    padding: 18px;
+  }
+
+  .landing-content h1 {
+    font-size: 38px;
+  }
+
+  .landing-buttons {
+    flex-direction: column;
+  }
+
+  .auth-card {
+    padding: 25px;
+  }
+}
