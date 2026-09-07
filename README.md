@@ -1,24 +1,46 @@
-# README
+# Twitter Clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Twitter-like social media web application built with Ruby on Rails.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- User registration and login
+- Create posts
+- View posts
+- Edit posts
+- Delete posts
+- Timeline/feed
+- Follow and unfollow users
+- User profiles
 
-* System dependencies
+## Technologies
 
-* Configuration
+- Ruby
+- Ruby on Rails
+- SQLite
+- HTML / CSS
+- JavaScript
+- Git / GitHub
 
-* Database creation
+## Ruby Version
 
-* Database initialization
+- Ruby 3.4.2
+- Rails 8.1.3.1
 
-* How to run the test suite
+## System Dependencies
 
-* Services (job queues, cache servers, search engines, etc.)
+Make sure the following are installed:
 
-* Deployment instructions
+- Ruby
+- Rails
+- Bundler
+- SQLite3
+- Git
 
-* ...
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Dinesh-2024-hub/Ruby-on-Rails-Project.git
+cd Ruby-on-Rails-Project
