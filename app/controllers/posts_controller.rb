@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.expect(post: [:content])
+    params.expect(post: [ :content ])
   end
 
   def authorize_post

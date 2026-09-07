@@ -3,15 +3,15 @@ Rails.application.routes.draw do
 
   get "home", to: "posts#index", as: :home
 
-  resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :likes, only: [:create, :destroy]
-    resources :comments, only: [:create, :destroy]
+  resources :posts, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
+    resources :likes, only: [ :create, :destroy ]
+    resources :comments, only: [ :create, :destroy ]
   end
 
   resource :session
   resources :passwords, param: :token
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [ :new, :create ]
 
   get "users/:username", to: "users#show", as: :user_profile
 

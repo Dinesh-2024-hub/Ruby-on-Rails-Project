@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create]
+  allow_unauthenticated_access only: [ :new, :create ]
 
   def new
     @user = User.new
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.expect(
-      user: [:email_address, :password, :password_confirmation, :username, :display_name]
+      user: [ :email_address, :password, :password_confirmation, :username, :display_name ]
     )
   end
 end
